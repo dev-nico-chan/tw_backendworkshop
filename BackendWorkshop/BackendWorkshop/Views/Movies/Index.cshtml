@@ -1,0 +1,80 @@
+@model IEnumerable<BackendWorkshop.Models.Movie>
+
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Movies</h2>
+@* # homework 4 -- add button for redirected to create page  *@
+<p>
+    @* <a href="/Movies/Create">Create New</a> *@
+    @Html.ActionLink("Create New", "Create","Movies")
+</p>
+<p>
+    @using (Html.BeginForm("Index", "Movies", FormMethod.Get))
+    {
+        <p>
+            Genre: @Html.DropDownList("MovieGenre", "All")
+            Title: @Html.TextBox("SearchString")
+            <input type="submit" value="Filter"/>
+        </p>
+    }
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Genre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rating)
+        </th>
+
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReleaseDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rating)
+                </td>
+                <td>
+                    <a href="/Movies/Edit/@item.ID">Edit</a> |
+                    <a href="/Movies/Details/@item.ID">Details</a> |
+                    <a href="/Movies/Delete/@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+    @* # homework 2 -- show the movies on this site  *@
+
+    @* # homework 6 -- add Edit,Details,Delete buttons every line and them show link to action *@
+
+
+</table>

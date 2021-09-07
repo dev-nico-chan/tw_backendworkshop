@@ -1,0 +1,25 @@
+@using Microsoft.AspNetCore.Http
+
+@{
+    ViewBag.Title = "Page";
+}
+
+
+@{
+    // basic points 18  data from Session
+    HttpContext context = new DefaultHttpContext();
+    string userName;
+    try
+    {
+        // userName = context.Session.GetString("userName");
+        userName = ViewBag.UserName;
+    }
+    catch(Exception ex)
+    {
+        userName = "But " + ex.Message;
+    }
+    
+}
+
+
+<h2>Welcome @userName</h2>
